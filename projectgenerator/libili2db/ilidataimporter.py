@@ -90,6 +90,9 @@ class DataImporter(QObject):
         args += ["--createEnumTabs"]
         args += ["--createNumChecks"]
         args += ["--coalesceMultiSurface"]
+        args += ["--coalesceMultiLine"]
+#        args += ["--coalesceMultiPoint"] # Requires ili2gpkg >= 3.11.0
+        args += ["--coalesceArray" ]
         args += ["--createGeomIdx"]
         args += ["--createFk"]
         args += ["--createMetaInfo"]

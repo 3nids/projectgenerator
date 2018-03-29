@@ -82,6 +82,8 @@ class Importer(QObject):
         args += ["--createNumChecks"]
         args += ["--coalesceMultiSurface"]
         args += ["--coalesceMultiLine"]
+#        args += ["--coalesceMultiPoint"] # Requires ili2gpkg >= 3.11.0
+        args += ["--coalesceArray"]
         args += ["--strokeArcs"]
         args += ["--beautifyEnumDispName"]
         #args += ["--createBasketCol"]
