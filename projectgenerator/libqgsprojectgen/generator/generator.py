@@ -28,6 +28,7 @@ from projectgenerator.libqgsprojectgen.dataobjects.layers import Layer
 from projectgenerator.libqgsprojectgen.dataobjects.relations import Relation
 from ..dbconnector import pg_connector, gpkg_connector
 from .config import IGNORED_SCHEMAS, IGNORED_TABLES, IGNORED_FIELDNAMES, READONLY_FIELDNAMES
+from ..utils.settings import Settings
 
 
 class Generator:
@@ -42,6 +43,7 @@ class Generator:
             self._db_connector = pg_connector.PGConnector(uri, schema)
         elif self.tool_name == 'ili2gpkg':
             self._db_connector = gpkg_connector.GPKGConnector(uri, None)
+        self.i18n = Internationalization(Settings().value("i18n_file"))
 
     def layers(self, filter_layer_list=[]):
         tables_info = self.get_tables_info()
@@ -117,7 +119,7 @@ class Generator:
                     alias = m.group(1)
 
                 field = Field(column_name)
-                field.alias = alias
+                field.alias = self.i18n.replace(alias)
 
                 if column_name in IGNORED_FIELDNAMES:
                     field.widget = 'Hidden'
